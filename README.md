@@ -4,7 +4,7 @@
 
 `solana-qsim` is a quantum circuit simulator that runs inside a Solana program. A program can re-run a small circuit itself, exactly, and score a quantum computer's measured counts against it. Combined with an on-chain receipt of the QPU job, a forged or tampered result is rejected on-chain.
 
-Part of [bb84](https://bb84.sh). Experimental, **devnet only, not audited**.
+Part of [bb84](https://bb84.live). Experimental, **devnet only, not audited**.
 
 ## Live on Solana devnet
 
