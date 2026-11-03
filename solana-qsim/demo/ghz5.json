@@ -1,5 +1,5 @@
 {
-  "format": "bb84-qsim-circuit-v1",
+  "format": "nexq-qsim-circuit-v1",
   "name": "ghz5",
   "source": "ghz:5",
   "num_qubits": 5,

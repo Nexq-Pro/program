@@ -18,7 +18,7 @@
 // fails), and if a qproof receipt exists for its job, the receipt's hashes must match the files.
 //
 // circuit.json: from tools/qasm2qsim.py. counts.json: from tools/sample.py (or a QPU run).
-// CLUSTER=devnet (default); BB84_KEYPAIR is the fee payer (default keys/devnet-wallet.json if
+// CLUSTER=devnet (default); NEXQ_KEYPAIR is the fee payer (default keys/devnet-wallet.json if
 // present, else ~/.config/solana/id.json).
 import {
   ComputeBudgetProgram, Connection, Keypair, PublicKey, Transaction, TransactionInstruction,
@@ -40,7 +40,7 @@ const SOURCES = ["LocalSimulator", "CloudEmulator", "Qpu"];
 const SYSTEM_PROGRAM = new PublicKey("11111111111111111111111111111111");
 
 const connection = new Connection(RPC_URL, "confirmed");
-const KEYPAIR = process.env.BB84_KEYPAIR || (existsSync("keys/devnet-wallet.json") ? "keys/devnet-wallet.json" : `${homedir()}/.config/solana/id.json`);
+const KEYPAIR = process.env.NEXQ_KEYPAIR || (existsSync("keys/devnet-wallet.json") ? "keys/devnet-wallet.json" : `${homedir()}/.config/solana/id.json`);
 const payer = Keypair.fromSecretKey(Uint8Array.from(JSON.parse(readFileSync(KEYPAIR, "utf8"))));
 const explorer = (sig) => `https://explorer.solana.com/tx/${sig}${CLUSTER === "mainnet-beta" ? "" : `?cluster=${CLUSTER}`}`;
 
@@ -180,7 +180,7 @@ const commands = {
   async record(countsPath) {
     const counts = JSON.parse(readFileSync(countsPath, "utf8"));
     const jobHash = jobIdHash(counts);
-    if (counts.format !== "bb84-qsim-counts-v1" || !jobHash || !counts.result_hash) throw new Error("not a bb84-qsim-counts-v1 file with a job id (or its sha256) and result_hash");
+    if (counts.format !== "nexq-qsim-counts-v1" || !jobHash || !counts.result_hash) throw new Error("not a nexq-qsim-counts-v1 file with a job id (or its sha256) and result_hash");
     checkCountsFile(counts);
     const existing = await fetchReceipt(jobHash);
     if (existing) return console.log(`receipt exists: ${existing.address}`);

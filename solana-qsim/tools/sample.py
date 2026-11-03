@@ -11,7 +11,7 @@ Amazon Braket QPU (paid; Rigetti, IQM, IonQ):
   python sample.py circuit.json --backend braket --device Cepheus-1-108Q --confirm-qpu --submit-only --out counts.json
   python sample.py --fetch counts.json.pending.json                               # waits for the task, writes counts.json
 
-Output: bb84-qsim-counts-v1 JSON with Qiskit-style bitstrings (leftmost = highest qubit),
+Output: nexq-qsim-counts-v1 JSON with Qiskit-style bitstrings (leftmost = highest qubit),
 the job id, source (LocalSimulator / Qpu) and result_hash = sha256 of the canonical counts
 ("bits:count" lines, sorted), which a qproof receipt records on-chain.
 Run with a Python that has qiskit (and amazon-braket-sdk for --backend braket).
@@ -41,7 +41,7 @@ def result_hash(counts: dict) -> str:
 def write_counts(path, spec, counts, *, backend, source, job_id, shots, extra=None):
     counts = dict(sorted(counts.items()))
     out = {
-        "format": "bb84-qsim-counts-v1",
+        "format": "nexq-qsim-counts-v1",
         "circuit_hash": spec["circuit_hash"],
         "num_qubits": spec["num_qubits"],
         "backend": backend,

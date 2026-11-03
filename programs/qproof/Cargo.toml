@@ -1,7 +1,7 @@
 [package]
 name = "qproof"
 version = "0.1.0"
-description = "bb84 qproof: on-chain receipts for quantum (QPU) jobs"
+description = "nexq qproof: on-chain receipts for quantum (QPU) jobs"
 edition.workspace = true
 rust-version.workspace = true
 

@@ -7,7 +7,7 @@
   ghz:N                N-qubit GHZ state
   random:N:LAYERS:SEED layers of random U rotations on every qubit, then a CX ladder
 
-Output (bb84-qsim-circuit-v1 JSON): qubit count, gate count, the encoded bytes (hex), the
+Output (nexq-qsim-circuit-v1 JSON): qubit count, gate count, the encoded bytes (hex), the
 on-chain circuit hash (sha256 chain over the gate bytes), and OpenQASM 2 of the measured circuit
 to send to a QPU. Unsupported gates are first decomposed with Qiskit's transpiler (no
 optimisation). --check compares solana-qsim's probabilities with Qiskit's Statevector.
@@ -137,7 +137,7 @@ def main() -> None:
     measured = circuit.remove_final_measurements(inplace=False)
     measured.measure_all()
     result = {
-        "format": "bb84-qsim-circuit-v1",
+        "format": "nexq-qsim-circuit-v1",
         "name": circuit.name,
         "source": args.source,
         "num_qubits": circuit.num_qubits,
